@@ -3,29 +3,12 @@ import React from "react";
 //include images into your bundle
 
 //create your first component
-export class List extends React.Component {
+export class ListNew extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			newItem: "",
-			list: [
-				{
-					id: 23,
-					value: "Make the bed"
-				},
-				{
-					id: 41,
-					value: "Wash my hands"
-				},
-				{
-					id: 59,
-					value: "Walk the dog"
-				},
-				{
-					id: 15,
-					value: "Eat"
-				}
-			]
+			list: []
 		};
 	}
 	updateInput(key, value) {
@@ -40,13 +23,11 @@ export class List extends React.Component {
 			value: this.state.newItem.slice()
 		};
 
-		//alert(newItem.value);
-
 		const list = [...this.state.list];
 		list.push(newItem);
 
 		this.setState({
-			list: list,
+			list,
 			newItem: ""
 		});
 	}
@@ -83,7 +64,6 @@ export class List extends React.Component {
 							</li>
 						);
 					})}
-					<li>{this.state.list.length + " Items left"} </li>
 				</ul>
 			</div>
 		);

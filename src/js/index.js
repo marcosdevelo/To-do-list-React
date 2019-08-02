@@ -11,5 +11,6 @@ import "../styles/index.scss";
 //import your own components
 import { List } from "./component/List.js";
 
+///import { ListNew } from "./component/ListNew.js";
 //render your react application
 ReactDOM.render(<List />, document.querySelector("#app"));
