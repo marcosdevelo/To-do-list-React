@@ -73,6 +73,33 @@ export class List extends React.Component {
 		});
 	}
 
+	deleteList() {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/marcostodo", {
+			method: "DELETE",
+			body: JSON.stringify([]),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(resp => {
+				console.log(resp.ok); // will be true if the response is successfull
+				console.log(resp.status); // the status code = 200 or code = 400 etc.
+				return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+			})
+			.then(data => {
+				//here is were your code should start after the fetch finishes
+				console.log(data); //this will print on the console the exact object received from the server
+				this.setState({
+					newItem: ""
+				});
+			})
+			.catch(error => {
+				//error handling
+				console.log(error);
+				alert("Error!!!!!!!!!!!!!!!!!!!!!");
+			});
+	}
+
 	addItem() {
 		const newItem = {
 			done: false,
@@ -85,7 +112,7 @@ export class List extends React.Component {
 		list.push(newItem);
 
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/marcostodo", {
-			method: "PUT",
+			method: "POST",
 			body: JSON.stringify(list),
 			headers: {
 				"Content-Type": "application/json"
@@ -111,9 +138,9 @@ export class List extends React.Component {
 			});
 	}
 
-	deleteItem(id) {
+	deleteItem(pupu) {
 		const list = [...this.state.list];
-		const updatedList = list.filter(item => item.id !== id);
+		const updatedList = list.filter(item => item.label !== pupu);
 		this.setState({ list: updatedList });
 	}
 
@@ -139,7 +166,7 @@ export class List extends React.Component {
 					}}
 				/>
 
-				<button onClick={() => this.addItem()}> Add </button>
+				<button onClick={() => this.deleteList()}> Delete List </button>
 
 				<br />
 
@@ -148,7 +175,8 @@ export class List extends React.Component {
 						return (
 							<li key={item.id}>
 								{item.label}
-								<span onClick={() => this.deleteItem(item.id)}>
+								<span
+									onClick={() => this.deleteItem(item.label)}>
 									<i className="fas fa-times" />
 								</span>
 							</li>
