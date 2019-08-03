@@ -8,26 +8,65 @@ export class List extends React.Component {
 		super(props);
 		this.state = {
 			newItem: "",
-			list: [
-				{
-					id: 23,
-					pupu: "Make the bed"
-				},
-				{
-					id: 41,
-					pupu: "Wash my hands"
-				},
-				{
-					id: 59,
-					pupu: "Walk the dog"
-				},
-				{
-					id: 15,
-					pupu: "Eat"
-				}
-			]
+			list: [],
+			username: null
 		};
 	}
+
+	componentDidMount() {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/marcostodo", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(resp => {
+				console.log(resp.ok); // will be true if the response is successfull
+				console.log(resp.status); // the status code = 200 or code = 400 etc.
+				return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+			})
+			.then(data => {
+				//here is were your code should start after the fetch finishes
+				console.log(data); //this will print on the console the exact object received from the server
+				this.setState({
+					list: data,
+					newItem: ""
+				});
+			})
+			.catch(error => {
+				//error handling
+				console.log(
+					"No se pudo obtener la lista, vamos a crearla: ",
+					error
+				);
+				fetch(
+					"https://assets.breatheco.de/apis/fake/todos/user/marcostodo",
+					{
+						method: "POST",
+						body: JSON.stringify([]),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					}
+				)
+					.then(resp => {
+						console.log(resp.ok); // will be true if the response is successfull
+						console.log(resp.status); // the status code = 200 or code = 400 etc.
+						console.log(resp.text()); // will try return the exact result as string
+						return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+					})
+					.then(data => {
+						//here is were your code should start after the fetch finishes
+						console.log(data); //this will print on the console the exact object received from the server
+					})
+					.catch(error => {
+						//error handling
+						console.log(error);
+						alert("Error!!!!!!!!!!!!!!!!!!!!!");
+					});
+			});
+	}
+
 	updateInput(key, value) {
 		this.setState({
 			[key]: value
@@ -36,8 +75,8 @@ export class List extends React.Component {
 
 	addItem() {
 		const newItem = {
-			id: 1 + Math.random(),
-			value: this.state.newItem.slice()
+			done: false,
+			label: this.state.newItem.slice()
 		};
 
 		//alert(newItem.value);
@@ -45,10 +84,31 @@ export class List extends React.Component {
 		const list = [...this.state.list];
 		list.push(newItem);
 
-		this.setState({
-			list: list,
-			newItem: ""
-		});
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/marcostodo", {
+			method: "PUT",
+			body: JSON.stringify(list),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(resp => {
+				console.log(resp.ok); // will be true if the response is successfull
+				console.log(resp.status); // the status code = 200 or code = 400 etc.
+				return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+			})
+			.then(data => {
+				//here is were your code should start after the fetch finishes
+				console.log(data); //this will print on the console the exact object received from the server
+				this.setState({
+					list: list,
+					newItem: ""
+				});
+			})
+			.catch(error => {
+				//error handling
+				console.log(error);
+				alert("Error!!!!!!!!!!!!!!!!!!!!!");
+			});
 	}
 
 	deleteItem(id) {
@@ -71,7 +131,7 @@ export class List extends React.Component {
 							? this.setState({
 									list: this.state.list.concat([
 										{
-											pupu: e.target.value
+											label: e.target.value
 										}
 									])
 							  })
@@ -87,7 +147,7 @@ export class List extends React.Component {
 					{this.state.list.map(item => {
 						return (
 							<li key={item.id}>
-								{item.pupu}
+								{item.label}
 								<span onClick={() => this.deleteItem(item.id)}>
 									<i className="fas fa-times" />
 								</span>
