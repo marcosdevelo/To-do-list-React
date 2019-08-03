@@ -11,19 +11,19 @@ export class List extends React.Component {
 			list: [
 				{
 					id: 23,
-					value: "Make the bed"
+					pupu: "Make the bed"
 				},
 				{
 					id: 41,
-					value: "Wash my hands"
+					pupu: "Wash my hands"
 				},
 				{
 					id: 59,
-					value: "Walk the dog"
+					pupu: "Walk the dog"
 				},
 				{
 					id: 15,
-					value: "Eat"
+					pupu: "Eat"
 				}
 			]
 		};
@@ -66,6 +66,17 @@ export class List extends React.Component {
 					placeholder="What needs to be done?"
 					value={this.state.newItem}
 					onChange={e => this.updateInput("newItem", e.target.value)}
+					onKeyPress={e => {
+						e.charCode == 13
+							? this.setState({
+									list: this.state.list.concat([
+										{
+											pupu: e.target.value
+										}
+									])
+							  })
+							: null;
+					}}
 				/>
 
 				<button onClick={() => this.addItem()}> Add </button>
@@ -76,7 +87,7 @@ export class List extends React.Component {
 					{this.state.list.map(item => {
 						return (
 							<li key={item.id}>
-								{item.value}
+								{item.pupu}
 								<span onClick={() => this.deleteItem(item.id)}>
 									<i className="fas fa-times" />
 								</span>
