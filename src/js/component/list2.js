@@ -6,7 +6,7 @@ import React from "react";
 //include images into your bundle
 
 //create your first component
-export class List extends React.Component {
+export class List2 extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {

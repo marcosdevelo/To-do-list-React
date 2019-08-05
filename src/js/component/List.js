@@ -62,7 +62,7 @@ export class List extends React.Component {
 					.catch(error => {
 						//error handling
 						console.log(error);
-						alert("Error!!!!!!!!!!!!!!!!!!!!!");
+						alert("Erro!!!!!!!!!!!!!!!!!!!!!");
 					});
 			});
 	}
@@ -96,7 +96,7 @@ export class List extends React.Component {
 			.catch(error => {
 				//error handling
 				console.log(error);
-				alert("Error!!!!!!!!!!!!!!!!!!!!!");
+				alert("mal!!!!!!!!!!!!!!!!!!!!!");
 			});
 	}
 
@@ -166,7 +166,7 @@ export class List extends React.Component {
 					}}
 				/>
 
-				<button onClick={() => this.deleteList()}> Delete List </button>
+				<button onClick={() => this.deleteList()}> Clear List</button>
 
 				<br />
 
