@@ -11,19 +11,19 @@ export class List extends React.Component {
 			list: [
 				{
 					id: 23,
-					pupu: "Make the bed"
+					value: "Make the bed"
 				},
 				{
 					id: 41,
-					pupu: "Wash my hands"
+					value: "Wash my hands"
 				},
 				{
 					id: 59,
-					pupu: "Walk the dog"
+					value: "Walk the dog"
 				},
 				{
 					id: 15,
-					pupu: "Eat"
+					value: "Eat"
 				}
 			]
 		};
@@ -58,7 +58,7 @@ export class List extends React.Component {
 							? this.setState({
 									list: this.state.list.concat([
 										{
-											pupu: e.target.value
+											value: e.target.value
 										}
 									])
 							  })
@@ -71,8 +71,8 @@ export class List extends React.Component {
 				<ul>
 					{this.state.list.map(item => {
 						return (
-							<li key={item.pupu}>
-								{item.pupu}
+							<li key={item.value}>
+								{item.value}
 								<span onClick={() => this.deleteItem(item.id)}>
 									<i className="fas fa-times" />
 								</span>
