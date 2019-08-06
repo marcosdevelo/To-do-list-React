@@ -11,19 +11,19 @@ export class List extends React.Component {
 			list: [
 				{
 					id: 23,
-					value: "Make the bed"
+					label: "Make the bed"
 				},
 				{
 					id: 41,
-					value: "Wash my hands"
+					label: "Wash my hands"
 				},
 				{
 					id: 59,
-					value: "Walk the dog"
+					label: "Walk the dog"
 				},
 				{
 					id: 15,
-					value: "Eat"
+					label: "Eat"
 				}
 			]
 		};
@@ -34,9 +34,9 @@ export class List extends React.Component {
 		});
 	}
 
-	deleteItem(id) {
+	deleteItem(pupu) {
 		const list = [...this.state.list];
-		const updatedList = list.filter(item => item.id !== id);
+		const updatedList = list.filter(item => item.label !== pupu);
 		this.setState({ list: updatedList });
 	}
 
@@ -58,7 +58,7 @@ export class List extends React.Component {
 							? this.setState({
 									list: this.state.list.concat([
 										{
-											value: e.target.value
+											label: e.target.value
 										}
 									])
 							  })
@@ -71,9 +71,10 @@ export class List extends React.Component {
 				<ul>
 					{this.state.list.map(item => {
 						return (
-							<li key={item.value}>
-								{item.value}
-								<span onClick={() => this.deleteItem(item.id)}>
+							<li key={item.id}>
+								{item.label}
+								<span
+									onClick={() => this.deleteItem(item.label)}>
 									<i className="fas fa-times" />
 								</span>
 							</li>
