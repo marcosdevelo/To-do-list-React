@@ -99,7 +99,8 @@ export class List extends React.Component {
 				//here is were your code should start after the fetch finishes
 				console.log(data); //this will print on the console the exact object received from the server
 				this.setState({
-					newItem: ""
+					newItem: "",
+					list: []
 				});
 			})
 			.catch(error => {
