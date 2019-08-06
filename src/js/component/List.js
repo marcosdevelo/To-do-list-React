@@ -34,23 +34,6 @@ export class List extends React.Component {
 		});
 	}
 
-	/*addItem() {
-		const newItem = {
-			id: 1 + Math.random(),
-			value: this.state.newItem.slice()
-		};
-
-		//alert(newItem.value);
-
-		const list = [...this.state.list];
-		list.push(newItem);
-
-		this.setState({
-			list: list,
-			newItem: ""
-		});
-	}
-*/
 	deleteItem(id) {
 		const list = [...this.state.list];
 		const updatedList = list.filter(item => item.id !== id);
@@ -60,6 +43,10 @@ export class List extends React.Component {
 	render() {
 		return (
 			<div className="container">
+				<header>
+					<h1 className="top">todos</h1>
+				</header>
+
 				<input
 					id="addToDo"
 					type="text"
@@ -78,8 +65,6 @@ export class List extends React.Component {
 							: null;
 					}}
 				/>
-
-				<button onClick={() => this.addItem()}> Add </button>
 
 				<br />
 
