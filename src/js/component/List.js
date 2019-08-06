@@ -34,7 +34,7 @@ export class List extends React.Component {
 		});
 	}
 
-	addItem() {
+	/*addItem() {
 		const newItem = {
 			id: 1 + Math.random(),
 			value: this.state.newItem.slice()
@@ -50,7 +50,7 @@ export class List extends React.Component {
 			newItem: ""
 		});
 	}
-
+*/
 	deleteItem(id) {
 		const list = [...this.state.list];
 		const updatedList = list.filter(item => item.id !== id);
@@ -86,7 +86,7 @@ export class List extends React.Component {
 				<ul>
 					{this.state.list.map(item => {
 						return (
-							<li key={item.id}>
+							<li key={item.pupu}>
 								{item.pupu}
 								<span onClick={() => this.deleteItem(item.id)}>
 									<i className="fas fa-times" />
