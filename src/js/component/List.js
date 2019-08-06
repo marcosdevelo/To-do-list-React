@@ -21,13 +21,18 @@ export class List extends React.Component {
 			}
 		})
 			.then(resp => {
-				console.log(resp.ok); // will be true if the response is successfull
-				console.log(resp.status); // the status code = 200 or code = 400 etc.
+				console.log(
+					"La respues del GET /user/marcostodo fue: ",
+					resp.ok
+				); // will be true if the response is successfull
 				return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
 			})
 			.then(data => {
 				//here is were your code should start after the fetch finishes
-				console.log(data); //this will print on the console the exact object received from the server
+				console.log(
+					"La data que llego del GET /usr/marcostodo fue: ",
+					data
+				); //this will print on the console the exact object received from the server
 				this.setState({
 					list: data,
 					newItem: ""
@@ -50,14 +55,18 @@ export class List extends React.Component {
 					}
 				)
 					.then(resp => {
-						console.log(resp.ok); // will be true if the response is successfull
-						console.log(resp.status); // the status code = 200 or code = 400 etc.
-						console.log(resp.text()); // will try return the exact result as string
+						console.log(
+							"La respuesta del POST a /user/marcostodo fue: ",
+							resp.ok
+						); // will be true if the response is successfull
 						return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
 					})
 					.then(data => {
 						//here is were your code should start after the fetch finishes
-						console.log(data); //this will print on the console the exact object received from the server
+						console.log(
+							"La data del POST /user/marcostodo es",
+							data
+						); //this will print on the console the exact object received from the server
 					})
 					.catch(error => {
 						//error handling
@@ -112,7 +121,7 @@ export class List extends React.Component {
 		list.push(newItem);
 
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/marcostodo", {
-			method: "POST",
+			method: "PUT",
 			body: JSON.stringify(list),
 			headers: {
 				"Content-Type": "application/json"
@@ -145,24 +154,24 @@ export class List extends React.Component {
 	}
 
 	render() {
+		console.log(
+			"Render se haz ejecutado en este momento y el state tiene el siguiente valor: ",
+			this.state
+		);
 		return (
 			<div className="container">
 				<input
-					id="addToDo"
-					type="text"
 					placeholder="What needs to be done?"
 					value={this.state.newItem}
 					onChange={e => this.updateInput("newItem", e.target.value)}
 					onKeyPress={e => {
-						e.charCode == 13
-							? this.setState({
-									list: this.state.list.concat([
-										{
-											label: e.target.value
-										}
-									])
-							  })
-							: null;
+						console.log("Haz apretado una tecla del teclado");
+						if (e.charCode == 13) {
+							console.log(
+								"Se ha detectado que la techa es un enter, se procede a acutializar el state con el nuevo todo"
+							);
+							this.addItem();
+						}
 					}}
 				/>
 
@@ -171,9 +180,9 @@ export class List extends React.Component {
 				<br />
 
 				<ul>
-					{this.state.list.map(item => {
+					{this.state.list.map((item, i) => {
 						return (
-							<li key={item.id}>
+							<li key={i}>
 								{item.label}
 								<span
 									onClick={() => this.deleteItem(item.label)}>
