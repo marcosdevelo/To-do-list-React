@@ -6,7 +6,7 @@
 
 h1.title {
   text-align: center;
-  color: black;
+  color: gray ;
   letter-spacing: 2px;
 }
 h1.todo-header {
@@ -39,7 +39,7 @@ h1.todo-header {
     /* The third layer shadow */
     0 20px 1px -9px rgba(0,0,0,0.15);
     /* Padding for demo purposes */
-    padding: 30px;
+
 }
 
 
@@ -71,23 +71,11 @@ input#addToDo {
   font-size: 22px;
    width: 100%;
   padding: 20px;
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -moz-border-box: border-box;
-}
-
-input#addToDo:focus {
-  background: white;
-
-
-
-  transition: 0.1s;
-}
-
-i.fa-trash {
-
+  border: 0px;
+  border-bottom: 1px solid #f1eded;
 
 }
+
 
 span {
 
@@ -112,10 +100,20 @@ li:hover span {
 .top{
         position: absolute;
     top: 39px;
-    right: 590px;
+    right: 456px;
     font-size: 122px;
     font-weight: 100;
     color: #dfa8b2;
 
 
+}
+input[type=text]:focus{
+  outline: 2px solid #f1eded;
+  border: 0px;
+  outline: none;
+       /* oranges! yey */
+}
+
+input, select, textarea{
+    color: gray;
 }
