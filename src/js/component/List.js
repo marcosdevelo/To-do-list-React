@@ -152,8 +152,25 @@ export class List extends React.Component {
 		const list = [...this.state.list];
 		const updatedList = list.filter(item => item.label !== pupu);
 		this.setState({ list: updatedList });
-	}
 
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/marcostodo", {
+			method: "PUT",
+			body: JSON.stringify(updatedList),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(data => {
+				//here is were your code should start after the fetch finishes
+				console.log(data); //this will print on the console the exact object received from the server
+				this.setState({});
+			})
+			.catch(error => {
+				//error handling
+				console.log(error);
+				alert("mal!!!!!!!!!!!!!!!!!!!!!");
+			});
+	}
 	render() {
 		console.log(
 			"Render se haz ejecutado en este momento y el state tiene el siguiente valor: ",

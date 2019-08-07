@@ -2,9 +2,7 @@
 
 
 
-body {
-  font-family: 'Roboto', sans-serif;
-}
+
 
 h1.title {
   text-align: center;
@@ -54,11 +52,12 @@ ul {
 
 li {
 
-     padding: 20px;
+    padding: 20px;
     line-height: 2em;
     margin: 0;
-
     border-bottom: 1px solid #f1eded;
+    font-size: 22px;
+        color: gray;
 }
 
 
@@ -69,7 +68,7 @@ li.clicked {
 }
 
 input#addToDo {
-  font-size: 18px;
+  font-size: 22px;
    width: 100%;
   padding: 20px;
   box-sizing: border-box;
@@ -108,4 +107,15 @@ float: right;
 li:hover span {
   opacity: 1.0;
   width: 40px;
+}
+
+.top{
+        position: absolute;
+    top: 39px;
+    right: 590px;
+    font-size: 122px;
+    font-weight: 100;
+    color: #dfa8b2;
+
+
 }
